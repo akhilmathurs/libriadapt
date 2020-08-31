@@ -105,8 +105,12 @@ The dataset could be used to evaluate the performance of ASR models under the pr
 5. Fine-tune the DS2 model for a specific domain (e.g., `en-us` and `ReSpeaker` microphone). 
 
 ```python
-python3 DeepSpeech.py --n_hidden 2048 --es_epochs 5 --checkpoint_dir /path/to/checkpoints/deepspeech-0.8.2-checkpoint \
---epochs 15 --save_checkpoint_dir /path/to/checkpoints/en-us/clean/respeaker/ --train_files /path/to/libriadapt/en-us/clean/ \ --train_files_respeaker.csv --learning_rate 0.0001 --train_batch_size 16 --scorer_path /path/to/scorer/deepspeech-0.8.2-models.scorer --load_cudnn
+python3 DeepSpeech.py --n_hidden 2048 --es_epochs 5 \
+--checkpoint_dir /path/to/checkpoints/deepspeech-0.8.2-checkpoint \
+--epochs 15 --save_checkpoint_dir /path/to/checkpoints/en-us/clean/respeaker/ \ 
+--train_files /path/to/libriadapt/en-us/clean/train_files_respeaker.csv \ 
+--learning_rate 0.0001 --train_batch_size 16 --load_cudnn \
+--scorer_path /path/to/scorer/deepspeech-0.8.2-models.scorer 
 ```
 
 This will load the DS2 pre-trained checkpoint, fine-tune it for `15` epochs on the .wav files inside `/path/to/libriadapt/en-us/clean/train_files_respeaker.csv` and save the checkpoints inside `/path/to/checkpoints/en-us/clean/respeaker/` 
