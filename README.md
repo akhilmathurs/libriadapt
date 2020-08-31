@@ -92,7 +92,7 @@ The authors have manually verified hundreds of speech recordings, but there is a
 
 ## Experimenting with the dataset
 
-The dataset could be used to evaluate the performance of ASR models under the presence of domain shift. Let us take the open-sourced Mozilla DeepSpeech2 ASR model as an example. 
+The dataset could be used to evaluate the performance of ASR models under the presence of domain shift. Let us take the open-sourced Mozilla DeepSpeech2 (DS2) ASR model as an example. 
 
 1. Follow the instructions here [https://deepspeech.readthedocs.io/en/latest/TRAINING.html] and clone the DeepSpeech2 repo.  
 
@@ -105,7 +105,8 @@ The dataset could be used to evaluate the performance of ASR models under the pr
 5. Fine-tune the DS2 model for a specific domain (e.g., `en-us` and `ReSpeaker` microphone). 
 
 ```python
-python3 DeepSpeech.py --n_hidden 2048 --es_epochs 5 --checkpoint_dir /path/to/checkpoints/deepspeech-0.8.2-checkpoint --epochs 15 --save_checkpoint_dir /path/to/checkpoints/en-us/clean/respeaker/ --train_files /path/to/libriadapt/en-us/clean/train_files_respeaker.csv --learning_rate 0.0001 --train_batch_size 16 --scorer_path /path/to/scorer/deepspeech-0.8.2-models.scorer --load_cudnn
+python3 DeepSpeech.py --n_hidden 2048 --es_epochs 5 --checkpoint_dir /path/to/checkpoints/deepspeech-0.8.2-checkpoint \
+--epochs 15 --save_checkpoint_dir /path/to/checkpoints/en-us/clean/respeaker/ --train_files /path/to/libriadapt/en-us/clean/ \ --train_files_respeaker.csv --learning_rate 0.0001 --train_batch_size 16 --scorer_path /path/to/scorer/deepspeech-0.8.2-models.scorer --load_cudnn
 ```
 
 This will load the DS2 pre-trained checkpoint, fine-tune it for `15` epochs on the .wav files inside `/path/to/libriadapt/en-us/clean/train_files_respeaker.csv` and save the checkpoints inside `/path/to/checkpoints/en-us/clean/respeaker/` 
@@ -120,6 +121,8 @@ python3 DeepSpeech.py --n_hidden 2048 --load_checkpoint_dir /path/to/checkpoints
 
 
 ### Results of the initial benchmarking
+
+Note that we use DS 0.8.2 for this benchmarking. Hence the results differ from those reported in our paper which were obtained on an older version of DS2. 
 
 1. Impact of microphone-induced domain shift in the Indian-English `en-in` accented dataset. 
 
