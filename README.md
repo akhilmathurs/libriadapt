@@ -6,6 +6,13 @@ The dataset is released under CC BY 4.0 license. If you use it in your work, ple
 
 *Akhil Mathur, Fahim Kawsar, Nadia Berthouze and Nicholas D. Lane, "Libri-Adapt: a New Speech Dataset for Unsupervised Domain Adaptation," 2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Barcelona, Spain, 2020, pp. 7439-7443, doi: 10.1109/ICASSP40776.2020.9053074*
 
+## Download URLs
+
+Partition 1: US-English speech recorded on six microphones `en-us` [http://www.google.com]
+Partition 2: Indian-English speech recorded on six microphones `en-in` [http://www.google.com]
+Partition 3: British-English speech recorded on six microphones `en-gb` [http://www.google.com]
+Partition 4: Noise recordings from six microphones `noise` [http://www.google.com]
+
 ## Dataset Overview 
 
 The LibriAdapt dataset is built on top of the LibriSpeech dataset [1], specifically using the `train-clean-100` partition for training data and `test-clean` partition for test data. 
@@ -35,9 +42,16 @@ Since the TTS model has a limited number of speaking styles for each accent, it 
 
 **Domain shift due to Acoustic Environemnt**
 
-Finally, the dataset contains three simulated background noise conditions: `Rain`, `Wind`, `Laughter`, in addition to the `Clean` condition. For the three noisy environments, we recorded samples of background noise again on all six microphones, and augmented them with the speech files. 
+Finally, the dataset contains three simulated background noise conditions: `Rain`, `Wind`, `Laughter`, in addition to the `Clean` condition. For the three noisy environments, we recorded samples of background noise on all six microphones, and augmented them with the microphone-specific speech files. 
 
 ## Dataset Description 
+
+The dataset is offered in four partitions. You can download the appropriate partition depending on the domain shift that you want to study. The partitions are `en-us`, `en-in`, `en-gb` and `noise`. 
+
+Inside each partition, there are subdirectories for the six microphones. Inside each microphone subdirectory, there are separate directories for training data and test data. 
+
+We also provide a CSV file inside the microphone subdirectory with 3 columns: `wav_filename, wav_filesize, transcript`. The formatting of these files is compatible with Mozilla DeepSpeech2 model [2] on which all the experiments are done so far. 
+
 ```
 📦libriadapt
  ┣ 📂en-us
@@ -75,7 +89,7 @@ Finally, the dataset contains three simulated background noise conditions: `Rain
 
 |           | Matrix   | ReSpeaker | USB      | Nexus    | Shure    | PS Eye   |
 |-----------|----------|-----------|----------|----------|----------|----------|
-| Matrix    | 0.055215 | 0.155436  | 0.073249 | 0.110685 | 0.069024 | 0.119291 |
+| Matrix    | **0.055215** | 0.155436  | 0.073249 | 0.110685 | 0.069024 | 0.119291 |
 | ReSpeaker | 0.807440 | 0.056819  | 0.154067 | 0.158762 | 0.127232 | 0.144229 |
 | USB       | 0.312770 | 0.098500  | 0.044086 | 0.094666 | 0.055685 | 0.096603 |
 | Nexus     | 0.461204 | 0.108495  | 0.092945 | 0.081738 | 0.054355 | 0.087136 |
