@@ -9,8 +9,11 @@ The dataset is released under CC BY 4.0 license. If you use it in your work, ple
 ## Download URLs
 
 Partition 1: US-English speech recorded on six microphones `en-us` [http://www.google.com]
+
 Partition 2: Indian-English speech recorded on six microphones `en-in` [http://www.google.com]
+
 Partition 3: British-English speech recorded on six microphones `en-gb` [http://www.google.com]
+
 Partition 4: Noise recordings from six microphones `noise` [http://www.google.com]
 
 ## Dataset Overview 
@@ -40,7 +43,7 @@ The dataset contains the LibriSpeech texts spoken in three accents: US-English (
 
 Since the TTS model has a limited number of speaking styles for each accent, it effectively reduces the speaker variability in the `en-in` and `en-gb` partitions. Hence, the ASR task becomes somewhat easier for them. 
 
-**Domain shift due to Acoustic Environemnt**
+**Domain shift due to Acoustic Environemnts**
 
 Finally, the dataset contains three simulated background noise conditions: `Rain`, `Wind`, `Laughter`, in addition to the `Clean` condition. For the three noisy environments, we recorded samples of background noise on all six microphones, and augmented them with the microphone-specific speech files. 
 
@@ -50,7 +53,10 @@ The dataset is offered in four partitions. You can download the appropriate part
 
 Inside each partition, there are subdirectories for the six microphones. Inside each microphone subdirectory, there are separate directories for training data and test data. 
 
-We also provide a CSV file inside the microphone subdirectory with 3 columns: `wav_filename, wav_filesize, transcript`. The formatting of these files is compatible with Mozilla DeepSpeech2 model [2] on which all the experiments are done so far. 
+We also provide a CSV file which lists all the files inside each microphone subdirectory. The CSV files contains 3 columns: `wav_filename, wav_filesize, transcript`, and its formatting is compatible with Mozilla DeepSpeech2 model [2] on which all the experiments are done so far. 
+
+### Warnings
+The authors have manually verified hundreds of speech recordings, but there is always the possibility that some (or many) of the speech recordings are incomplete or noisy. Please make sure to test for such cases in your data pipelines. 
 
 ```
 📦libriadapt
@@ -87,15 +93,15 @@ We also provide a CSV file inside the microphone subdirectory with 3 columns: `w
 ## Quantification of Domain Shift
 
 
+
 |           | Matrix   | ReSpeaker | USB      | Nexus    | Shure    | PS Eye   |
 |-----------|----------|-----------|----------|----------|----------|----------|
 | Matrix    | **0.055215** | 0.155436  | 0.073249 | 0.110685 | 0.069024 | 0.119291 |
-| ReSpeaker | 0.807440 | 0.056819  | 0.154067 | 0.158762 | 0.127232 | 0.144229 |
-| USB       | 0.312770 | 0.098500  | 0.044086 | 0.094666 | 0.055685 | 0.096603 |
-| Nexus     | 0.461204 | 0.108495  | 0.092945 | 0.081738 | 0.054355 | 0.087136 |
-| Shure     | 0.622235 | 0.126587  | 0.257692 | 0.115106 | 0.040585 | 0.088368 |
-| PS Eye    | 0.612455 | 0.119135  | 0.257711 | 0.110959 | 0.055802 | 0.043578 |
-
+| ReSpeaker | 0.807440 | **0.056819**  | 0.154067 | 0.158762 | 0.127232 | 0.144229 |
+| USB       | 0.312770 | 0.098500  | **0.044086** | 0.094666 | 0.055685 | 0.096603 |
+| Nexus     | 0.461204 | 0.108495  | 0.092945 | 0.081738 | **0.054355** | 0.087136 |
+| Shure     | 0.622235 | 0.126587  | 0.257692 | 0.115106 | **0.040585** | 0.088368 |
+| PS Eye    | 0.612455 | 0.119135  | 0.257711 | 0.110959 | 0.055802 | **0.043578** |
 
 
 
