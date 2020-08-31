@@ -38,7 +38,7 @@ Since the TTS model has a limited number of speaking styles for each accent, it 
 Finally, the dataset contains three simulated background noise conditions: `Rain`, `Wind`, `Laughter`, in addition to the `Clean` condition. For the three noisy environments, we recorded samples of background noise again on all six microphones, and augmented them with the speech files. 
 
 ## Dataset Description 
-
+```
 📦libriadapt
  ┣ 📂en-us
  ┃ ┣ 📂matrix
@@ -68,7 +68,7 @@ Finally, the dataset contains three simulated background noise conditions: `Rain
  ┃ ┣ 📂respeaker
  ┃ ┣ 📂shure
  ┃ ┗ 📂usb
-
+```
 
 ## Quantification of Domain Shift
 
