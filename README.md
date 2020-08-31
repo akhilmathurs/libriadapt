@@ -90,9 +90,38 @@ The authors have manually verified hundreds of speech recordings, but there is a
  ┃ ┗ 📂usb
 ```
 
-## Quantification of Domain Shift
+## Experimenting with the dataset
+
+The dataset could be used to evaluate the performance of ASR models under the presence of domain shift. Let us take the open-sourced Mozilla DeepSpeech2 ASR model as an example. 
+
+1. Follow the instructions here [https://deepspeech.readthedocs.io/en/latest/TRAINING.html] and clone the DeepSpeech2 repo.  
+
+2. Create a Docker container to setup the training environment by following these instructions: [https://deepspeech.readthedocs.io/en/latest/TRAINING.html#basic-dockerfile-for-training]. 
+
+3. Download the DS2 TensorFlow checkpoint and scorer version 0.8.2 from [https://github.com/mozilla/DeepSpeech/releases/tag/v0.8.2]    
+
+4. Run the docker container in interactive mode. 
+
+5. Fine-tune the DS2 model for a specific domain (e.g., `en-us` and `ReSpeaker` microphone). 
+
+```python
+python3 DeepSpeech.py --n_hidden 2048 --es_epochs 5 --checkpoint_dir /path/to/checkpoints/deepspeech-0.8.2-checkpoint --epochs 15 --save_checkpoint_dir /path/to/checkpoints/en-us/clean/respeaker/ --train_files /path/to/libriadapt/en-us/clean/train_files_respeaker.csv --learning_rate 0.0001 --train_batch_size 16 --scorer_path /path/to/scorer/deepspeech-0.8.2-models.scorer --load_cudnn
+```
+
+This will load the DS2 pre-trained checkpoint, fine-tune it for `15` epochs on the .wav files inside `/path/to/libriadapt/en-us/clean/train_files_respeaker.csv` and save the checkpoints inside `/path/to/checkpoints/en-us/clean/respeaker/` 
+
+6. Test the trained model  on a target domain (e.g., `en-us` and `pseye` microphone)
+
+```python
+python3 DeepSpeech.py --n_hidden 2048 --load_checkpoint_dir /path/to/checkpoints/en-us/clean/respeaker/ --test_files //path/to/libriadapt/en-us/clean/test_files_pseye.csv --test_batch_size 16 --scorer_path /path/to/scorer/deepspeech-0.8.2-models.scorer --load_cudnn
+```
+
+7. There are a lot of DS2 hyperparameters to play with during the fine-tuning step. See here: [https://deepspeech.readthedocs.io/en/latest/Flags.html#training-flags]
 
 
+### Results of the initial benchmarking
+
+1. Impact of microphone-induced domain shift in the Indian-English `en-in` accented dataset. 
 
 |           | Matrix   | ReSpeaker | USB      | Nexus    | Shure    | PS Eye   |
 |-----------|----------|-----------|----------|----------|----------|----------|
@@ -103,6 +132,13 @@ The authors have manually verified hundreds of speech recordings, but there is a
 | Shure     | 0.622235 | 0.126587  | 0.257692 | 0.115106 | **0.040585** | 0.088368 |
 | PS Eye    | 0.612455 | 0.119135  | 0.257711 | 0.110959 | 0.055802 | **0.043578** |
 
+The table reports the WER obtained on the DS2 model. Here, rows correspond to the microphone on which DS2 is finetuned and columns correspond to the microphone on which the fine-tuned model is tested. As we can see, microphone variability has a significant impact on the WER of the model. 
+
+2. Impact of microphone-induced domain shift in the US-English `en-us` accented dataset. 
+
+Let us repeat the experiment with US-accented speech. Here we see slightly higher WERs and also observe the effect of microphone-induced domain shifts. 
+
+3. We can create complex scenarios of domain shifts as well. Let us find the WER when DS2 is trained for `en-us, Clean, ReSpeaker` and tested on `en-gb, Clean, USB`. 
 
 
 [1] LibriSpeech ASR Corpus http://www.openslr.org/12
