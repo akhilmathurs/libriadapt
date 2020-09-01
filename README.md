@@ -133,7 +133,7 @@ python3 DeepSpeech.py --n_hidden 2048 --test_batch_size 16 --load_cudnn \
 
 Note that we use the latest version of DeepSpeech2 (0.8.2) for the experiments below. Hence the results differ from those reported in our paper which were obtained on an older version of DS2. The speech files in .wav format are directly fed to DS2 without doing any additional pre-processing. 
 
-1. **Impact of microphone-induced domain shift in the Indian-English accented dataset (`en-in`)**
+#### Impact of microphone-induced domain shift in the Indian-English accented dataset (`en-in`) ####
 
 The table reports the WER obtained on the DS2 model. Here, rows correspond to the microphone on which DS2 is finetuned and columns correspond to the microphone on which the fine-tuned model is tested. As we can see, microphone variability has a significant impact on the WER of the model. 
 
@@ -147,7 +147,7 @@ The table reports the WER obtained on the DS2 model. Here, rows correspond to th
 | PS Eye    | 0.612455 | 0.119135  | 0.257711 | 0.110959 | 0.055802 | **0.043578** |
 
 
-2. **Impact of microphone-induced domain shift in the US-English accented dataset (`en-us`) **
+#### Impact of microphone-induced domain shift in the US-English accented dataset (`en-us`) ####
 
 Let us repeat the experiment with US-accented speech and finetune the DS2 model on `en-us` dataset for 20 epochs. Here we see slightly higher WERs and also observe the effect of microphone-induced domain shifts. 
 
@@ -162,7 +162,7 @@ Let us repeat the experiment with US-accented speech and finetune the DS2 model 
 | PS Eye    | 0.245721 | 0.133022     | 0.177597     | 0.128504     | 0.111741     | **0.096407** |
 
 
-3. **Study more complex scenarios by mixing various domain shifts**
+#### Study more complex scenarios by mixing various domain shifts ####
 
 Let us find the WER when DS2 is trained for `{en-us, Clean, ReSpeaker}` and tested on `{en-us, Clean, ReSpeaker}`, `{en-gb, Clean, USB}`, `{en-in, Clean, Shure}` and `{en-gb, Rain, PS Eye}`. 
 
