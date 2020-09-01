@@ -18,7 +18,7 @@ Partition 4: Noise recordings from six microphones `noise` [http://www.google.co
 
 ## Dataset Overview 
 
-The LibriAdapt dataset is built on top of the LibriSpeech dataset [1], specifically using the `train-clean-100` partition for training data and `test-clean` partition for test data. 
+The LibriAdapt dataset is built on top of the LibriSpeech dataset [[1]](#1), specifically using the `train-clean-100` partition for training data and `test-clean` partition for test data. 
 
 It is primarily designed to faciliate domain adaptation research for ASR models, and contains the following three types of domain shifts in the data (please refer to the paper for details on the data collection methodology): 
 
@@ -37,6 +37,8 @@ Both training and test sets are recorded simultaneously on six off-the-shelf mic
 |    Shure MV5    |     1    |           Desktop microphone for podcasts, video conferencing           |
 
 
+For all the multi-channel microphones, we only release the merged speech output provided by the microphone manufacturers, after applying beamforming or other channel merging techniques. 
+
 **Domain shift due to Speaker Accents**
 
 The dataset contains the LibriSpeech texts spoken in three accents: US-English (`en-us`), Indian-English (`en-in`) and British-English (`en-gb`). For `en-us`, we replayed the original LibriSpeech audios and recorded them on the six microphones. The other accented speech files are generated using the Google Wavenet TTS model: for this purporse, we passed the Librispeech transcripts to the TTS model and obtained the accented speech. 
@@ -53,7 +55,7 @@ The dataset is offered in four partitions. You can download the appropriate part
 
 Inside each partition, there are subdirectories for the six microphones. Inside each microphone subdirectory, there are separate directories for training data and test data. 
 
-We also provide a CSV file which lists all the files inside each microphone subdirectory. The CSV files contains 3 columns: `wav_filename, wav_filesize, transcript`, and its formatting is compatible with Mozilla DeepSpeech2 model [2] on which all the experiments are done so far. 
+We also provide a CSV file which lists all the files inside each microphone subdirectory. The CSV files contains 3 columns: `wav_filename, wav_filesize, transcript`, and its formatting is compatible with Mozilla DeepSpeech2 model [[2]](#2) on which all the experiments are done so far. 
 
 ### Warnings
 The authors have manually verified hundreds of speech recordings, but there is always the possibility that some (or many) of the speech recordings are incomplete or noisy. Please make sure to test for such cases in your data pipelines. 
@@ -120,7 +122,7 @@ This will load the DS2 pre-trained checkpoint, fine-tune it for `15` epochs on t
 ```python
 python3 DeepSpeech.py --n_hidden 2048 --test_batch_size 16 --load_cudnn \
 --load_checkpoint_dir /path/to/checkpoints/en-us/clean/respeaker/ \
---test_files //path/to/libriadapt/en-us/clean/test_files_pseye.csv \
+--test_files /path/to/libriadapt/en-us/clean/test_files_pseye.csv \
 --scorer_path /path/to/scorer/deepspeech-0.8.2-models.scorer 
 ```
 
@@ -131,7 +133,7 @@ python3 DeepSpeech.py --n_hidden 2048 --test_batch_size 16 --load_cudnn \
 
 Note that we use the latest version of DeepSpeech2 (0.8.2) for the experiments below. Hence the results differ from those reported in our paper which were obtained on an older version of DS2. The speech files in .wav format are directly fed to DS2 without doing any additional pre-processing. 
 
-1. Impact of microphone-induced domain shift in the Indian-English accented dataset (`en-in`)
+1. **Impact of microphone-induced domain shift in the Indian-English accented dataset (`en-in`)**
 
 The table reports the WER obtained on the DS2 model. Here, rows correspond to the microphone on which DS2 is finetuned and columns correspond to the microphone on which the fine-tuned model is tested. As we can see, microphone variability has a significant impact on the WER of the model. 
 
@@ -145,7 +147,7 @@ The table reports the WER obtained on the DS2 model. Here, rows correspond to th
 | PS Eye    | 0.612455 | 0.119135  | 0.257711 | 0.110959 | 0.055802 | **0.043578** |
 
 
-2. Impact of microphone-induced domain shift in the US-English accented dataset (`en-us`). 
+2. **Impact of microphone-induced domain shift in the US-English accented dataset (`en-us`) **
 
 Let us repeat the experiment with US-accented speech and finetune the DS2 model on `en-us` dataset for 20 epochs. Here we see slightly higher WERs and also observe the effect of microphone-induced domain shifts. 
 
@@ -160,7 +162,9 @@ Let us repeat the experiment with US-accented speech and finetune the DS2 model 
 | PS Eye    | 0.245721 | 0.133022     | 0.177597     | 0.128504     | 0.111741     | **0.096407** |
 
 
-3. We can also study more complex scenarios by mixing various domain shifts. Let us find the WER when DS2 is trained for `{en-us, Clean, ReSpeaker}` and tested on `{en-us, Clean, ReSpeaker}`, `{en-gb, Clean, USB}`, `{en-in, Clean, Shure}` and `{en-gb, Rain, PS Eye}`. 
+3. **Study more complex scenarios by mixing various domain shifts**
+
+Let us find the WER when DS2 is trained for `{en-us, Clean, ReSpeaker}` and tested on `{en-us, Clean, ReSpeaker}`, `{en-gb, Clean, USB}`, `{en-in, Clean, Shure}` and `{en-gb, Rain, PS Eye}`. 
 
 |                         | en-us, Clean, ReSpeaker | en-gb, Clean, USB | en-in, Clean, Shure | en-gb, Rain, PS Eye |
 |:-----------------------:|:-----------------------:|:-----------------:|:-------------------:|:-------------------:|
@@ -171,6 +175,6 @@ Let us repeat the experiment with US-accented speech and finetune the DS2 model 
 If you have any questions or find any errors in the dataset, please reach out to me at akhilmathurs{at}gmail{dot}{com} 
 
 
+<a id="1">[1]</a> LibriSpeech ASR Corpus http://www.openslr.org/12
 
-[1] LibriSpeech ASR Corpus http://www.openslr.org/12
-[2] https://github.com/mozilla/DeepSpeech 
+<a id="2">[2]</a> https://github.com/mozilla/DeepSpeech 
