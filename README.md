@@ -105,20 +105,23 @@ The dataset could be used to evaluate the performance of ASR models under the pr
 5. Fine-tune the DS2 model for a specific domain (e.g., `en-us` and `ReSpeaker` microphone). 
 
 ```python
-python3 DeepSpeech.py --n_hidden 2048 --es_epochs 5 \
+python3 DeepSpeech.py --n_hidden 2048 --es_epochs 5 --epochs 15 \
 --checkpoint_dir /path/to/checkpoints/deepspeech-0.8.2-checkpoint \
---epochs 15 --save_checkpoint_dir /path/to/checkpoints/en-us/clean/respeaker/ \ 
+--save_checkpoint_dir /path/to/checkpoints/en-us/clean/respeaker/ \ 
 --train_files /path/to/libriadapt/en-us/clean/train_files_respeaker.csv \ 
---learning_rate 0.0001 --train_batch_size 16 --load_cudnn \
---scorer_path /path/to/scorer/deepspeech-0.8.2-models.scorer 
+--scorer_path /path/to/scorer/deepspeech-0.8.2-models.scorer \
+--learning_rate 0.0001 --train_batch_size 16 --load_cudnn
 ```
 
-This will load the DS2 pre-trained checkpoint, fine-tune it for `15` epochs on the .wav files inside `/path/to/libriadapt/en-us/clean/train_files_respeaker.csv` and save the checkpoints inside `/path/to/checkpoints/en-us/clean/respeaker/` 
+This will load the DS2 pre-trained checkpoint, fine-tune it for `15` epochs on the .wav files listed in `/path/to/libriadapt/en-us/clean/train_files_respeaker.csv` and save the checkpoints at `/path/to/checkpoints/en-us/clean/respeaker/` 
 
-6. Test the trained model  on a target domain (e.g., `en-us` and `pseye` microphone)
+6. Test the trained model on a target domain (e.g., `en-us` and `pseye` microphone)
 
 ```python
-python3 DeepSpeech.py --n_hidden 2048 --load_checkpoint_dir /path/to/checkpoints/en-us/clean/respeaker/ --test_files //path/to/libriadapt/en-us/clean/test_files_pseye.csv --test_batch_size 16 --scorer_path /path/to/scorer/deepspeech-0.8.2-models.scorer --load_cudnn
+python3 DeepSpeech.py --n_hidden 2048 --test_batch_size 16 --load_cudnn \
+--load_checkpoint_dir /path/to/checkpoints/en-us/clean/respeaker/ \
+--test_files //path/to/libriadapt/en-us/clean/test_files_pseye.csv \
+--scorer_path /path/to/scorer/deepspeech-0.8.2-models.scorer 
 ```
 
 7. There are a lot of DS2 hyperparameters to play with during the fine-tuning step. See here: [https://deepspeech.readthedocs.io/en/latest/Flags.html#training-flags]
@@ -126,9 +129,11 @@ python3 DeepSpeech.py --n_hidden 2048 --load_checkpoint_dir /path/to/checkpoints
 
 ### Results of the initial benchmarking
 
-Note that we use DS 0.8.2 for this benchmarking. Hence the results differ from those reported in our paper which were obtained on an older version of DS2. 
+Note that we use the latest version of DeepSpeech2 (0.8.2) for the experiments below. Hence the results differ from those reported in our paper which were obtained on an older version of DS2. The speech files in .wav format are directly fed to DS2 without doing any additional pre-processing. 
 
-1. Impact of microphone-induced domain shift in the Indian-English `en-in` accented dataset. 
+1. Impact of microphone-induced domain shift in the Indian-English accented dataset (`en-in`)
+
+The table reports the WER obtained on the DS2 model. Here, rows correspond to the microphone on which DS2 is finetuned and columns correspond to the microphone on which the fine-tuned model is tested. As we can see, microphone variability has a significant impact on the WER of the model. 
 
 |           | Matrix   | ReSpeaker | USB      | Nexus    | Shure    | PS Eye   |
 |-----------|----------|-----------|----------|----------|----------|----------|
@@ -139,13 +144,33 @@ Note that we use DS 0.8.2 for this benchmarking. Hence the results differ from t
 | Shure     | 0.622235 | 0.126587  | 0.257692 | 0.115106 | **0.040585** | 0.088368 |
 | PS Eye    | 0.612455 | 0.119135  | 0.257711 | 0.110959 | 0.055802 | **0.043578** |
 
-The table reports the WER obtained on the DS2 model. Here, rows correspond to the microphone on which DS2 is finetuned and columns correspond to the microphone on which the fine-tuned model is tested. As we can see, microphone variability has a significant impact on the WER of the model. 
 
-2. Impact of microphone-induced domain shift in the US-English `en-us` accented dataset. 
+2. Impact of microphone-induced domain shift in the US-English accented dataset (`en-us`). 
 
-Let us repeat the experiment with US-accented speech. Here we see slightly higher WERs and also observe the effect of microphone-induced domain shifts. 
+Let us repeat the experiment with US-accented speech and finetune the DS2 model on `en-us` dataset for 20 epochs. Here we see slightly higher WERs and also observe the effect of microphone-induced domain shifts. 
 
-3. We can create complex scenarios of domain shifts as well. Let us find the WER when DS2 is trained for `en-us, Clean, ReSpeaker` and tested on `en-gb, Clean, USB`. 
+
+|           | Matrix   | ReSpeaker    | USB          | Nexus        | Shure        | PS Eye       |
+|-----------|----------|--------------|--------------|--------------|--------------|--------------|
+| Matrix    | 0.121247 | 0.133706     | 0.135427     | **0.112250** | 0.115262     | 0.129755     |
+| ReSpeaker | 0.250220 | **0.106883** | 0.134528     | 0.106695     | 0.113619     | 0.115829     |
+| USB       | 0.206544 | 0.128601     | **0.107419** | 0.112133     | 0.122108     | 0.179083     |
+| Nexus     | 0.211630 | 0.121345     | 0.126900     | **0.094334** | 0.097893     | 0.125178     |
+| Shure     | 0.245232 | 0.140493     | 0.152346     | 0.108534     | **0.086843** | 0.130538     |
+| PS Eye    | 0.245721 | 0.133022     | 0.177597     | 0.128504     | 0.111741     | **0.096407** |
+
+
+3. We can also study more complex scenarios by mixing various domain shifts. Let us find the WER when DS2 is trained for `{en-us, Clean, ReSpeaker}` and tested on `{en-us, Clean, ReSpeaker}`, `{en-gb, Clean, USB}`, `{en-in, Clean, Shure}` and `{en-gb, Rain, PS Eye}`. 
+
+|                         | en-us, Clean, ReSpeaker | en-gb, Clean, USB | en-in, Clean, Shure | en-gb, Rain, PS Eye |
+|:-----------------------:|:-----------------------:|:-----------------:|:-------------------:|:-------------------:|
+| en-us, Clean, ReSpeaker |       **0.106883**      |      0.158038     |       0.315352      |                     |
+
+## Contact
+
+If you have any questions or find any errors in the dataset, please reach out to me at akhilmathurs{at}gmail{dot}{com} 
+
 
 
 [1] LibriSpeech ASR Corpus http://www.openslr.org/12
+[2] https://github.com/mozilla/DeepSpeech 
