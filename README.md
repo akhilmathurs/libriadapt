@@ -1,6 +1,6 @@
 # LibriAdapt Dataset
 
-These are the instructions to download and use the LibriAdapt dataset released at ICASSP 2020. 
+These are the instructions to download and use the [LibriAdapt dataset](https://ieeexplore.ieee.org/document/9053074) released at ICASSP 2020. 
 
 The dataset is released under CC BY 4.0 license. If you use it in your work, please cite the following paper:
 
@@ -17,7 +17,7 @@ The dataset is released under CC BY 4.0 license. If you use it in your work, ple
 
 ## Download
 
-**Clean US-English speech recorded on six microphones `en-us`** 
+**Clean US-English speech recorded on six microphones (`en-us`)** 
 
 [Part 1 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_aa) 
 
@@ -30,20 +30,20 @@ The dataset is released under CC BY 4.0 license. If you use it in your work, ple
 [Part 5 (6.4GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ae)
 
 
-**Clean Indian-English speech recorded on six microphones `en-in`**
+**Clean Indian-English speech recorded on six microphones (`en-in`)**
 
 [Part 1 (10GB)](http://sensix.tech/libriadapt/libriadapt-en-in.tar.gz.part_aa)
 
 [Part 2 (8.6GB)](http://sensix.tech/libriadapt/libriadapt-en-in.tar.gz.part_ab)
 
 
-**Clean British-English speech recorded on six microphones `en-gb`**
+**Clean British-English speech recorded on six microphones (`en-gb`)**
 
 [Part 1 (10GB)](http://sensix.tech/libriadapt/libriadapt-en-gb.tar.gz.part_aa)
 
 [Part 2 (9.5GB)](http://sensix.tech/libriadapt/libriadapt-en-gb.tar.gz.part_ab)
 
-**Noise recordings of rain, wind, laughter from six microphones `noise`** 
+**Noise recordings of rain, wind, laughter from six microphones (`noise`)** 
 
 [Part 1 (24 MB)](http://sensix.tech/libriadapt/libriadapt-noise.tar.gz)
 
@@ -62,19 +62,16 @@ tar -zxvf libriadapt-en-in.tar.gz
 
 We provide a script to augment the clean speech files with the noise samples, and generate a noisy-version of the dataset. Check [augment_noise.py](https://github.com/akhilmathurs/libriadapt/blob/master/augment_noise.py). 
 
-### Warnings
-The authors have manually verified hundreds of speech recordings, but there is always the possibility that some (or many) of the speech recordings are incomplete or noisy. Please make sure to test for such cases in your data pipelines. 
-
 
 ## Dataset Overview 
 
 The LibriAdapt dataset is built on top of the LibriSpeech dataset [[1]](#1), specifically using the `train-clean-100` partition for training data and `test-clean` partition for test data. 
 
-It is primarily designed to faciliate domain adaptation research for ASR models, and contains the following three types of domain shifts in the data (please refer to the paper for details on the data collection methodology): 
+It is primarily designed to faciliate domain adaptation research for ASR models, and contains the following three types of domain shifts in the data (please refer to our [paper](https://ieeexplore.ieee.org/document/9053074) for details on the data collection methodology): 
 
 **Domain shift due to Microphones**
 
-Both training and test sets are recorded simultaneously on six off-the-shelf microphones that are available in the market to develop speech products. They are as follows:
+Both training and test sets are recorded simultaneously on six off-the-shelf microphones available in the market to develop speech products. They are as follows:
 
 
 |      Device     | Channels |                                Use-cases                                |
@@ -187,7 +184,7 @@ The dataset could be used to evaluate the performance of ASR models under the pr
 
 4. Run the docker container in interactive mode. 
 
-5. Fine-tune the DS2 model for a specific domain (e.g., `en-us` and `ReSpeaker` microphone). 
+5. Fine-tune the DS2 model for a specific domain (e.g., `en-us`, `Clean`, and `ReSpeaker` microphone). 
 
 ```python
 python3 DeepSpeech.py --n_hidden 2048 --es_epochs 5 --epochs 15 \
@@ -200,7 +197,7 @@ python3 DeepSpeech.py --n_hidden 2048 --es_epochs 5 --epochs 15 \
 
 This will load the DS2 pre-trained checkpoint, fine-tune it for `15` epochs on the .wav files listed in `/path/to/libriadapt/en-us/clean/train_files_respeaker.csv` and save the checkpoints at `/path/to/checkpoints/en-us/clean/respeaker/` 
 
-6. Test the trained model on a target domain (e.g., `en-us` and `pseye` microphone)
+6. Test the trained model on a target domain (e.g., `en-us`, `Clean`, and `pseye` microphone)
 
 ```python
 python3 DeepSpeech.py --n_hidden 2048 --test_batch_size 16 --load_cudnn \
@@ -216,24 +213,23 @@ python3 DeepSpeech.py --n_hidden 2048 --test_batch_size 16 --load_cudnn \
 
 Note that we use the latest version of DeepSpeech2 (0.8.2) for the experiments below. Hence the results differ from those reported in our paper which were obtained on an older version of DS2. 
 
-The raw speech files in .wav format are directly fed to DS2 without doing any additional pre-processing. 
+For these baseline experiments, the raw speech files in .wav format are directly fed to DS2 without doing any additional pre-processing. 
 
-#### Performance of pre-trained DS2 on Librispeech test sets recoreded on different microphones ####
+### Performance of pre-trained DS2 on Librispeech test sets recoreded on different microphones ###
 
-Below we compare the WER of DS2 on various test datasets. DS2 has an advertised WER of 0.0597 on the original Librispeech-clean test corpus. 
-However, when the same test corpus is recorded on different microphones, the WER increases significantly (as high as 4.5x). 
-
-This increase could be partly attributed to the data collection methodology of LibriAdapt where we replay the speech files on a monitor speaker. Nevertheless, the variations in WER across microphones is interesting and presents opportunities for domain adaptation. 
-
+Below we compare the Word Error Rate (WER) of DS2 on various test datasets. DS2 has an advertised WER of 0.0597 on the original Librispeech-clean test corpus (`en-us`). However, when the same test corpus is recorded on different microphones, the WER increases significantly (as high as 4.5x). 
 
 |                   | Librispeech-clean-test |  Matrix  |  Nexus6  |  PS Eye  | ReSpeaker | Shure    | USB      |
 |:-----------------:|:----------------------:|:--------:|:--------:|:--------:|-----------|----------|----------|
 | DeepSpeech2 0.8.2 |       **0.0597**       | 0.276390 | 0.106245 | 0.116866 | 0.127056  | 0.082481 | 0.169147 |
 
+This increase could be partly attributed to the data collection methodology of LibriAdapt where we replay the speech files using a speaker. Nevertheless, the variations in WER across microphones is interesting and present clear opportunities for applying domain adaptation. 
 
-#### Impact of microphone-induced domain shift in the Indian-English accented dataset (`en-in`) ####
+### Impact of microphone-induced domain shift in the Indian-English accented dataset (`en-in`) ###
 
-The table reports the WER obtained on the DS2 model. Here, rows correspond to the microphone on which DS2 is finetuned and columns correspond to the microphone on which the fine-tuned model is tested. As we can see, microphone variability has a significant impact on the WER of the model. 
+Let us finetune the DS2 model on the Indian-English dataset obtained from the six microphones, and study the generalization performance of the model. 
+
+The following table reports the WER for different experiment settings. Here, rows correspond to the microphone on which DS2 is finetuned and columns correspond to the microphone on which the fine-tuned model is tested. As we can see, microphone variability has a significant impact on the WER of the model. 
 
 |           | Matrix   | ReSpeaker | USB      | Nexus    | Shure    | PS Eye   |
 |-----------|----------|-----------|----------|----------|----------|----------|
@@ -245,7 +241,7 @@ The table reports the WER obtained on the DS2 model. Here, rows correspond to th
 | PS Eye    | 0.612455 | 0.119135  | 0.257711 | 0.110959 | 0.055802 | **0.043578** |
 
 
-#### Impact of microphone-induced domain shift in the US-English accented dataset (`en-us`) ####
+### Impact of microphone-induced domain shift in the US-English accented dataset (`en-us`) ###
 
 Let us repeat the experiment with US-accented speech and finetune the DS2 model on `en-us` dataset for 20 epochs. Here we see slightly higher WERs and also observe the effect of microphone-induced domain shifts. 
 
@@ -260,9 +256,12 @@ Let us repeat the experiment with US-accented speech and finetune the DS2 model 
 | PS Eye    | 0.245721 | 0.133022     | 0.177597     | 0.128504     | 0.111741     | **0.096407** |
 
 
-#### Study more complex scenarios by mixing various domain shifts ####
+### Study more complex scenarios by mixing various domain shifts ###
 
-Let us find the WER when DS2 is trained for `{en-us, Clean, ReSpeaker}` and tested on `{en-us, Clean, ReSpeaker}`, `{en-in, Clean, Shure}`, `{en-gb, Clean, PS Eye}`, and `{en-gb, Rain, PS Eye}`. 
+LibriAdapt allows simulating multiple domain shifts in the data. 
+
+Let us find the WER when DS2 is trained for `{en-us, Clean, ReSpeaker}` and tested on `{en-us, Clean, ReSpeaker}` (i.e., no domain shift), `{en-in, Clean, Shure}` (i.e., accent shift), `{en-gb, Clean, PS Eye}` (i.e., accent and microphone shift), and `{en-gb, Rain, PS Eye}` (i.e., accent, microphone, background noise shift). 
+
 
 |                         | en-us, Clean, ReSpeaker | en-in, Clean, Shure | en-gb, Clean, PS Eye | en-gb, Rain, PS Eye |
 |:-----------------------:|:-----------------------:|:-------------------:|:--------------------:|:-------------------:|
@@ -270,7 +269,10 @@ Let us find the WER when DS2 is trained for `{en-us, Clean, ReSpeaker}` and test
 
 ## Contact
 
-If you have any questions or find any errors in the dataset, please reach out to me at akhilmathurs{at}gmail{dot}{com} 
+If you have any questions or find any errors in the dataset, please reach out to akhilmathurs{at}gmail{dot}{com}.  
+
+### Warnings
+The authors have manually verified hundreds of speech recordings, but there is always the possibility that some (or many) of the speech recordings are incomplete or noisy. Please make sure to test for such cases in your data pipelines. 
 
 
 <a id="1">[1]</a> LibriSpeech ASR Corpus http://www.openslr.org/12
