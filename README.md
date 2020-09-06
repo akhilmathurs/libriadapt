@@ -9,9 +9,9 @@ The dataset is released under CC BY 4.0 license. If you use any part of the data
 
  - [Dataset Overview](https://github.com/akhilmathurs/libriadapt#dataset-overview)
  - [Dataset Description](https://github.com/akhilmathurs/libriadapt#dataset-description)
+ - [Download](https://github.com/akhilmathurs/libriadapt#Download)
  - [Experimenting with the dataset](https://github.com/akhilmathurs/libriadapt#experimenting-with-the-dataset)
  - [Baseline results](https://github.com/akhilmathurs/libriadapt#baseline-results)
- - [Download](https://github.com/akhilmathurs/libriadapt#Download)
  - [Contact](https://github.com/akhilmathurs/libriadapt#contact)
 
 ## Dataset Overview 
