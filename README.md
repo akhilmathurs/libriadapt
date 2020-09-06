@@ -6,15 +6,57 @@ The dataset is released under CC BY 4.0 license. If you use it in your work, ple
 
 *Akhil Mathur, Fahim Kawsar, Nadia Berthouze and Nicholas D. Lane, "Libri-Adapt: a New Speech Dataset for Unsupervised Domain Adaptation," 2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Barcelona, Spain, 2020, pp. 7439-7443, doi: 10.1109/ICASSP40776.2020.9053074*
 
-## Download URLs
+## Download
 
-Partition 1: US-English speech recorded on six microphones `en-us` [http://www.google.com]
+**Clean US-English speech recorded on six microphones `en-us`** 
 
-Partition 2: Indian-English speech recorded on six microphones `en-in` [http://www.google.com]
+[Part 1 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_aa)
 
-Partition 3: British-English speech recorded on six microphones `en-gb` [http://www.google.com]
+[Part 2 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ab)
 
-Partition 4: Noise recordings from six microphones `noise` [http://www.google.com]
+[Part 3 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ac)
+
+[Part 4 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ad)
+
+[Part 5 (6.4GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ae)
+
+
+**Clean Indian-English speech recorded on six microphones `en-in`**
+
+[Part 1 (10GB)](http://sensix.tech/libriadapt/libriadapt-en-in.tar.gz.part_aa)
+
+[Part 2 (8.6GB)](http://sensix.tech/libriadapt/libriadapt-en-in.tar.gz.part_ab)
+
+
+**Clean British-English speech recorded on six microphones `en-gb`**
+
+[Part 1 (10GB)](http://sensix.tech/libriadapt/libriadapt-en-gb.tar.gz.part_aa)
+
+[Part 2 (9.5GB)](http://sensix.tech/libriadapt/libriadapt-en-gb.tar.gz.part_ab)
+
+**Noise recordings of rain, wind, laughter from six microphones `noise`** 
+
+[Part 1 (24 MB)](http://sensix.tech/libriadapt/libriadapt-noise.tar.gz)
+
+
+
+### Merge the tar.gz.part_* files
+
+Once the compressed tar files are downloaded, they need to be merged using `cat` and then uncompressed. For example:
+
+```sh
+cat libriadapt-en-in.tar.gz.part_a* > libriadapt-en-in.tar.gz
+tar -zxvf libriadapt-en-in.tar.gz
+```
+
+
+### Generating the noisy datasets
+
+We provide a script to augment the clean speech files with the noise samples, and generate a noisy-version of the dataset. Check the `augment_noise.py` script. 
+
+### Warnings
+The authors have manually verified hundreds of speech recordings, but there is always the possibility that some (or many) of the speech recordings are incomplete or noisy. Please make sure to test for such cases in your data pipelines. 
+
 
 ## Dataset Overview 
 
@@ -57,32 +99,65 @@ Inside each partition, there are subdirectories for the six microphones. Inside 
 
 We also provide a CSV file which lists all the files inside each microphone subdirectory. The CSV files contains 3 columns: `wav_filename, wav_filesize, transcript`, and its formatting is compatible with Mozilla DeepSpeech2 model [[2]](#2) on which all the experiments are done so far. 
 
-### Warnings
-The authors have manually verified hundreds of speech recordings, but there is always the possibility that some (or many) of the speech recordings are incomplete or noisy. Please make sure to test for such cases in your data pipelines. 
-
 ```
 📦libriadapt
- ┣ 📂en-us
- ┃ ┣ 📂matrix
- ┃ ┣ 📂nexus6
- ┃ ┣ 📂pseye
- ┃ ┣ 📂respeaker
- ┃ ┣ 📂shure
- ┃ ┗ 📂usb
- ┣ 📂en-in
- ┃ ┣ 📂matrix
- ┃ ┣ 📂nexus6
- ┃ ┣ 📂pseye
- ┃ ┣ 📂respeaker
- ┃ ┣ 📂shure
- ┃ ┗ 📂usb
  ┣ 📂en-gb
  ┃ ┣ 📂matrix
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
  ┃ ┣ 📂nexus6
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
  ┃ ┣ 📂pseye
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
  ┃ ┣ 📂respeaker
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
  ┃ ┣ 📂shure
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
  ┃ ┗ 📂usb
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
+ ┣ 📂en-in
+ ┃ ┣ 📂matrix
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
+ ┃ ┣ 📂nexus6
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
+ ┃ ┣ 📂pseye
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
+ ┃ ┣ 📂respeaker
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
+ ┃ ┣ 📂shure
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
+ ┃ ┗ 📂usb
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
+ ┣ 📂en-us
+ ┃ ┣ 📂matrix
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
+ ┃ ┣ 📂nexus6
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
+ ┃ ┣ 📂pseye
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
+ ┃ ┣ 📂respeaker
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
+ ┃ ┣ 📂shure
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
+ ┃ ┗ 📂usb
+ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┗ 📂train
  ┗ 📂noise
  ┃ ┣ 📂matrix
  ┃ ┣ 📂nexus6
@@ -129,9 +204,24 @@ python3 DeepSpeech.py --n_hidden 2048 --test_batch_size 16 --load_cudnn \
 7. There are a lot of DS2 hyperparameters to play with during the fine-tuning step. See here: [https://deepspeech.readthedocs.io/en/latest/Flags.html#training-flags]
 
 
-### Results of the initial benchmarking
+### Baseline results
 
-Note that we use the latest version of DeepSpeech2 (0.8.2) for the experiments below. Hence the results differ from those reported in our paper which were obtained on an older version of DS2. The speech files in .wav format are directly fed to DS2 without doing any additional pre-processing. 
+Note that we use the latest version of DeepSpeech2 (0.8.2) for the experiments below. Hence the results differ from those reported in our paper which were obtained on an older version of DS2. 
+
+The raw speech files in .wav format are directly fed to DS2 without doing any additional pre-processing. 
+
+#### Performance of pre-trained DS2 on Librispeech test sets recoreded on different microphones ####
+
+Below we compare the WER of DS2 on various test datasets. DS2 has an advertised WER of 0.0597 on the original Librispeech-clean test corpus. 
+However, when the same test corpus is recorded on different microphones, the WER increases significantly (as high as 4.5x). 
+
+This increase could be partly attributed to the data collection methodology of LibriAdapt where we replay the speech files on a monitor speaker. Nevertheless, the variations in WER across microphones is interesting and presents opportunities for domain adaptation. 
+
+
+|                   | Librispeech-clean-test |  Matrix  |  Nexus6  |  PS Eye  | ReSpeaker | Shure    | USB      |
+|:-----------------:|:----------------------:|:--------:|:--------:|:--------:|-----------|----------|----------|
+| DeepSpeech2 0.8.2 |       **0.0597**       | 0.276390 | 0.106245 | 0.116866 | 0.127056  | 0.082481 | 0.169147 |
+
 
 #### Impact of microphone-induced domain shift in the Indian-English accented dataset (`en-in`) ####
 
@@ -164,11 +254,11 @@ Let us repeat the experiment with US-accented speech and finetune the DS2 model 
 
 #### Study more complex scenarios by mixing various domain shifts ####
 
-Let us find the WER when DS2 is trained for `{en-us, Clean, ReSpeaker}` and tested on `{en-us, Clean, ReSpeaker}`, `{en-gb, Clean, USB}`, `{en-in, Clean, Shure}` and `{en-gb, Rain, PS Eye}`. 
+Let us find the WER when DS2 is trained for `{en-us, Clean, ReSpeaker}` and tested on `{en-us, Clean, ReSpeaker}`, `{en-in, Clean, Shure}`, `{en-gb, Clean, PS Eye}`, and `{en-gb, Rain, PS Eye}`. 
 
-|                         | en-us, Clean, ReSpeaker | en-gb, Clean, USB | en-in, Clean, Shure | en-gb, Rain, PS Eye |
-|:-----------------------:|:-----------------------:|:-----------------:|:-------------------:|:-------------------:|
-| en-us, Clean, ReSpeaker |       **0.106883**      |      0.158038     |       0.315352      |                     |
+|                         | en-us, Clean, ReSpeaker | en-in, Clean, Shure | en-gb, Clean, PS Eye | en-gb, Rain, PS Eye |
+|:-----------------------:|:-----------------------:|:-------------------:|:--------------------:|:-------------------:|
+| en-us, Clean, ReSpeaker |       **0.106883**      |       0.315352      |       0.195826       |       0.256049      |
 
 ## Contact
 
