@@ -282,7 +282,7 @@ Let us find the WER when DS2 is trained on `{en-us, Clean, ReSpeaker}` dataset, 
 
 If you have any questions or find any errors in the dataset, please reach out to akhilmathurs{at}gmail{dot}{com}.  
 
-### Warnings
+### Disclaimer
 The authors have manually verified hundreds of speech recordings, but there is always the possibility that some (or many) of the speech recordings are incomplete or noisy. Please make sure to test for such cases in your data pipelines. 
 
 
