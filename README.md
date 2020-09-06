@@ -126,6 +126,57 @@ We also provide a CSV file which lists all the files inside each microphone subd
  ┃ ┗ 📂usb
 ```
 
+
+
+### Download
+
+**Clean US-English speech recorded on six microphones (`en-us`)** 
+
+[Part 1 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_aa) 
+
+[Part 2 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ab) 
+
+[Part 3 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ac) 
+
+[Part 4 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ad) 
+
+[Part 5 (6.4GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ae)
+
+
+**Clean Indian-English speech recorded on six microphones (`en-in`)**
+
+[Part 1 (10GB)](http://sensix.tech/libriadapt/libriadapt-en-in.tar.gz.part_aa)
+
+[Part 2 (8.6GB)](http://sensix.tech/libriadapt/libriadapt-en-in.tar.gz.part_ab)
+
+
+**Clean British-English speech recorded on six microphones (`en-gb`)**
+
+[Part 1 (10GB)](http://sensix.tech/libriadapt/libriadapt-en-gb.tar.gz.part_aa)
+
+[Part 2 (9.5GB)](http://sensix.tech/libriadapt/libriadapt-en-gb.tar.gz.part_ab)
+
+**Noise recordings of rain, wind, laughter from six microphones (`noise`)** 
+
+[Part 1 (24 MB)](http://sensix.tech/libriadapt/libriadapt-noise.tar.gz)
+
+
+#### Merge the tar.gz.part_* files
+
+Once the compressed tar files are downloaded, they need to be merged using `cat` and then uncompressed. For example:
+
+```sh
+cat libriadapt-en-in.tar.gz.part_a* > libriadapt-en-in.tar.gz
+tar -zxvf libriadapt-en-in.tar.gz
+```
+
+
+#### Generating the noisy datasets
+
+We provide a script to augment the clean speech files with the noise samples, and generate a noisy-version of the dataset. Check [augment_noise.py](https://github.com/akhilmathurs/libriadapt/blob/master/augment_noise.py). 
+
+
+
 ## Experimenting with the dataset
 
 The dataset could be used to evaluate the performance of ASR models under the presence of domain shift. Let us take the open-sourced Mozilla DeepSpeech2 (DS2) ASR model as an example. 
@@ -228,54 +279,6 @@ Let us find the WER when DS2 is trained on `{en-us, Clean, ReSpeaker}` dataset, 
 |                         | en-us, Clean, ReSpeaker | en-in, Clean, ReSpeaker | en-gb, Clean, PS Eye | en-gb, Rain, PS Eye |
 |:-----------------------:|:-----------------------:|:-------------------:|:--------------------:|:-------------------:|
 | en-us, Clean, ReSpeaker |       **0.106883**      |       0.276331      |       0.195826       |       0.256049      |
-
-
-## Download
-
-**Clean US-English speech recorded on six microphones (`en-us`)** 
-
-[Part 1 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_aa) 
-
-[Part 2 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ab) 
-
-[Part 3 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ac) 
-
-[Part 4 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ad) 
-
-[Part 5 (6.4GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ae)
-
-
-**Clean Indian-English speech recorded on six microphones (`en-in`)**
-
-[Part 1 (10GB)](http://sensix.tech/libriadapt/libriadapt-en-in.tar.gz.part_aa)
-
-[Part 2 (8.6GB)](http://sensix.tech/libriadapt/libriadapt-en-in.tar.gz.part_ab)
-
-
-**Clean British-English speech recorded on six microphones (`en-gb`)**
-
-[Part 1 (10GB)](http://sensix.tech/libriadapt/libriadapt-en-gb.tar.gz.part_aa)
-
-[Part 2 (9.5GB)](http://sensix.tech/libriadapt/libriadapt-en-gb.tar.gz.part_ab)
-
-**Noise recordings of rain, wind, laughter from six microphones (`noise`)** 
-
-[Part 1 (24 MB)](http://sensix.tech/libriadapt/libriadapt-noise.tar.gz)
-
-
-### Merge the tar.gz.part_* files
-
-Once the compressed tar files are downloaded, they need to be merged using `cat` and then uncompressed. For example:
-
-```sh
-cat libriadapt-en-in.tar.gz.part_a* > libriadapt-en-in.tar.gz
-tar -zxvf libriadapt-en-in.tar.gz
-```
-
-
-### Generating the noisy datasets
-
-We provide a script to augment the clean speech files with the noise samples, and generate a noisy-version of the dataset. Check [augment_noise.py](https://github.com/akhilmathurs/libriadapt/blob/master/augment_noise.py). 
 
 
 ## Contact
