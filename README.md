@@ -260,7 +260,15 @@ Let us repeat the experiment with US-accented speech and finetune the DS2 model 
 
 LibriAdapt allows simulating multiple domain shifts in the data. 
 
-Let us find the WER when DS2 is trained for `{en-us, Clean, ReSpeaker}` and tested on `{en-us, Clean, ReSpeaker}` (i.e., no domain shift), `{en-in, Clean, Shure}` (i.e., accent shift), `{en-gb, Clean, PS Eye}` (i.e., accent and microphone shift), and `{en-gb, Rain, PS Eye}` (i.e., accent, microphone, background noise shift). 
+Let us find the WER when DS2 is trained on `{en-us, Clean, ReSpeaker}` dataset, and tested on 
+
+1. `{en-us, Clean, ReSpeaker}` (i.e., no domain shift), 
+
+2. `{en-in, Clean, Shure}` (i.e., accent shift),
+
+3. `{en-gb, Clean, PS Eye}` (i.e., accent and microphone shift),
+
+4. `{en-gb, Rain, PS Eye}` (i.e., accent, microphone, background noise shift).
 
 
 |                         | en-us, Clean, ReSpeaker | en-in, Clean, Shure | en-gb, Clean, PS Eye | en-gb, Rain, PS Eye |
