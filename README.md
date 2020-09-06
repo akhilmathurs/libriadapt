@@ -19,17 +19,23 @@ The dataset is released under CC BY 4.0 license. If you use it in your work, ple
 
 **Clean US-English speech recorded on six microphones `en-us`** 
 
-[Part 1 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_aa) [Part 2 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ab) [Part 3 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ac) [Part 4 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ad) [Part 5 (6.4GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ae)
+[Part 1 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_aa) 
+[Part 2 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ab) 
+[Part 3 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ac) 
+[Part 4 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ad) 
+[Part 5 (6.4GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ae)
 
 
 **Clean Indian-English speech recorded on six microphones `en-in`**
 
-[Part 1 (10GB)](http://sensix.tech/libriadapt/libriadapt-en-in.tar.gz.part_aa) [Part 2 (8.6GB)](http://sensix.tech/libriadapt/libriadapt-en-in.tar.gz.part_ab)
+[Part 1 (10GB)](http://sensix.tech/libriadapt/libriadapt-en-in.tar.gz.part_aa)
+[Part 2 (8.6GB)](http://sensix.tech/libriadapt/libriadapt-en-in.tar.gz.part_ab)
 
 
 **Clean British-English speech recorded on six microphones `en-gb`**
 
-[Part 1 (10GB)](http://sensix.tech/libriadapt/libriadapt-en-gb.tar.gz.part_aa) [Part 2 (9.5GB)](http://sensix.tech/libriadapt/libriadapt-en-gb.tar.gz.part_ab)
+[Part 1 (10GB)](http://sensix.tech/libriadapt/libriadapt-en-gb.tar.gz.part_aa)
+[Part 2 (9.5GB)](http://sensix.tech/libriadapt/libriadapt-en-gb.tar.gz.part_ab)
 
 **Noise recordings of rain, wind, laughter from six microphones `noise`** 
 
