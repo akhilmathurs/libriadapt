@@ -179,7 +179,7 @@ We provide a script to augment the clean speech files with the noise samples, an
 
 ## Experimenting with the dataset
 
-The dataset could be used to evaluate the performance of ASR models under the presence of domain shift. Let us take the open-sourced Mozilla DeepSpeech2 (DS2) ASR model[[2]](#2) as an example. 
+The dataset could be used to evaluate the performance of ASR models under the presence of domain shift. Let us take the open-sourced Mozilla DeepSpeech2 (DS2) ASR model [[2]](#2) as an example. 
 
 1. Follow the instructions here [https://deepspeech.readthedocs.io/en/latest/TRAINING.html] and clone the DeepSpeech2 repo.  
 
