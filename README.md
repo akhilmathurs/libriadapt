@@ -202,7 +202,7 @@ python3 DeepSpeech.py --n_hidden 2048 --es_epochs 5 --epochs 15 \
 
 This will load the DS2 pre-trained checkpoint, fine-tune it for `15` epochs on the .wav files listed in `/path/to/libriadapt/en-us/clean/train_files_respeaker.csv` and save the checkpoints at `/path/to/checkpoints/en-us/clean/respeaker/` 
 
-6. Test the trained model on a target domain (e.g., `en-us`, `Clean`, and `pseye` microphone)
+6. Test the finetuned model on a target domain (e.g., `en-us`, `Clean`, and `pseye` microphone)
 
 ```python
 python3 DeepSpeech.py --n_hidden 2048 --test_batch_size 16 --load_cudnn \
@@ -222,7 +222,9 @@ For these baseline experiments, the raw speech files in .wav format are directly
 
 ### Performance of pre-trained DS2 on Librispeech test sets recorded on different microphones ###
 
-Below we compare the Word Error Rate (WER) of DS2 on various test datasets. DS2 has an advertised WER of 0.0597 on the original Librispeech-clean test corpus (`en-us`). However, when the same test corpus is recorded on different microphones, the WER increases significantly (as high as 4.5x). 
+Below we compare the Word Error Rate (WER) of the pre-trained DS2 (0.8.2) model on the test datasets from different microphones. No finetuning is done on the model in this experiment. 
+
+DS2 has an advertised WER of 0.0597 on the original Librispeech-clean test corpus (`en-us`). However, when the same test corpus is recorded on different microphones in the LibriAdapt dataset, the WER increases significantly (as high as 4.5x). 
 
 |                   | Librispeech-clean-test |  Matrix  |  Nexus6  |  PS Eye  | ReSpeaker | Shure    | USB      |
 |:-----------------:|:----------------------:|:--------:|:--------:|:--------:|-----------|----------|----------|
@@ -248,7 +250,7 @@ The following table reports the WER for different experiment settings. Here, row
 
 ### Microphone-induced domain shift in the US-English accented dataset (`en-us`) ###
 
-Let us repeat the experiment with US-accented speech and finetune the DS2 model on `en-us` dataset for 20 epochs. Here we see slightly higher WERs and also observe the effect of microphone-induced domain shifts. 
+Let us repeat the experiment with US-accented speech and finetune the DS2 model on `en-us` dataset for 20 epochs. Here we see slightly higher WERs and again observe the effect of microphone-induced domain shift. 
 
 
 |           | Matrix   | ReSpeaker    | USB          | Nexus        | Shure        | PS Eye       |
@@ -265,7 +267,7 @@ Let us repeat the experiment with US-accented speech and finetune the DS2 model 
 
 LibriAdapt allows simulating multiple domain shifts in the data. 
 
-Let us find the WER when DS2 is trained on `{en-us, Clean, ReSpeaker}` dataset, and tested on 
+Let us find the WER when DS2 is finetuned on training data from `{en-us, Clean, ReSpeaker}`, and tested on 
 
 1. `{en-us, Clean, ReSpeaker}` (i.e., no domain shift), 
 
