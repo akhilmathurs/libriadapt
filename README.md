@@ -267,7 +267,7 @@ Let us repeat the experiment with US-accented speech and finetune the DS2 model 
 
 LibriAdapt allows simulating multiple domain shifts in the data. 
 
-Let us find the WER when DS2 is finetuned on training data from `{en-us, Clean, ReSpeaker}`, and tested on 
+Let us find the WER when DS2 is finetuned on the training data from `{en-us, Clean, ReSpeaker}`, and tested on 
 
 1. `{en-us, Clean, ReSpeaker}` (i.e., no domain shift), 
 
