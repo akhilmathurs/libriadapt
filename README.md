@@ -53,7 +53,7 @@ The dataset is offered in four partitions. You can download the appropriate part
 
 Inside each partition, there are subdirectories for the six microphones. Inside each microphone subdirectory, there are separate directories for training data and test data. 
 
-We also provide a CSV file which lists all the files inside each microphone subdirectory. The CSV files contains 3 columns: `wav_filename, wav_filesize, transcript`, and its formatting is compatible with Mozilla DeepSpeech2 model [[2]](#2) on which all the experiments are done so far. 
+We also provide a CSV file which lists all the .wav files inside each microphone subdirectory. The CSV files contains 3 columns: `wav_filename, wav_filesize, transcript`, and their formatting is compatible with the format expected by the Mozilla DeepSpeech2 model [[2]](#2).  
 
 ```
 📦libriadapt
@@ -179,7 +179,7 @@ We provide a script to augment the clean speech files with the noise samples, an
 
 ## Experimenting with the dataset
 
-The dataset could be used to evaluate the performance of ASR models under the presence of domain shift. Let us take the open-sourced Mozilla DeepSpeech2 (DS2) ASR model as an example. 
+The dataset could be used to evaluate the performance of ASR models under the presence of domain shift. Let us take the open-sourced Mozilla DeepSpeech2 (DS2) ASR model[[2]](#2) as an example. 
 
 1. Follow the instructions here [https://deepspeech.readthedocs.io/en/latest/TRAINING.html] and clone the DeepSpeech2 repo.  
 
@@ -211,7 +211,7 @@ python3 DeepSpeech.py --n_hidden 2048 --test_batch_size 16 --load_cudnn \
 --scorer_path /path/to/scorer/deepspeech-0.8.2-models.scorer 
 ```
 
-7. There are a lot of DS2 hyperparameters to play with during the fine-tuning step. See here: [https://deepspeech.readthedocs.io/en/latest/Flags.html#training-flags]
+7. There are many hyperparameters to play with during the fine-tuning step of DS2. See here: [https://deepspeech.readthedocs.io/en/latest/Flags.html#training-flags]
 
 
 ## Baseline results
@@ -220,7 +220,7 @@ Note that we use the latest version of DeepSpeech2 (0.8.2) for the experiments b
 
 For these baseline experiments, the raw speech files in .wav format are directly fed to DS2 without doing any additional pre-processing. 
 
-### Performance of pre-trained DS2 on Librispeech test sets recoreded on different microphones ###
+### Performance of pre-trained DS2 on Librispeech test sets recorded on different microphones ###
 
 Below we compare the Word Error Rate (WER) of DS2 on various test datasets. DS2 has an advertised WER of 0.0597 on the original Librispeech-clean test corpus (`en-us`). However, when the same test corpus is recorded on different microphones, the WER increases significantly (as high as 4.5x). 
 
@@ -230,7 +230,7 @@ Below we compare the Word Error Rate (WER) of DS2 on various test datasets. DS2 
 
 This increase could be partly attributed to the data collection methodology of LibriAdapt where we replay the speech files using a speaker. Nevertheless, the variations in WER across microphones is interesting and present clear opportunities for applying domain adaptation. 
 
-### Impact of microphone-induced domain shift in the Indian-English accented dataset (`en-in`) ###
+### Microphone-induced domain shift in the Indian-English accented dataset (`en-in`) ###
 
 Let us finetune the DS2 model on the Indian-English dataset obtained from the six microphones, and study the generalization performance of the model. 
 
@@ -246,7 +246,7 @@ The following table reports the WER for different experiment settings. Here, row
 | PS Eye    | 0.612455 | 0.119135  | 0.257711 | 0.110959 | 0.055802 | **0.043578** |
 
 
-### Impact of microphone-induced domain shift in the US-English accented dataset (`en-us`) ###
+### Microphone-induced domain shift in the US-English accented dataset (`en-us`) ###
 
 Let us repeat the experiment with US-accented speech and finetune the DS2 model on `en-us` dataset for 20 epochs. Here we see slightly higher WERs and also observe the effect of microphone-induced domain shifts. 
 
