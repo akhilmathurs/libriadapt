@@ -280,7 +280,7 @@ Let us find the WER when DS2 is finetuned on the training data from `{en-us, Cle
 
 |                         | en-us, Clean, ReSpeaker | en-gb, Clean, ReSpeaker | en-gb, Clean, PS Eye | en-gb, Rain, PS Eye |
 |:-----------------------:|:-----------------------:|:-------------------:|:--------------------:|:-------------------:|
-| en-us, Clean, ReSpeaker |       **0.106883**      |       0.276331      |       0.195826       |       0.256049      |
+| en-us, Clean, ReSpeaker |       **0.106883**      |       0.148786      |       0.195826       |       0.256049      |
 
 
 ## Contact
