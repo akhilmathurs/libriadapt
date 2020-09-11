@@ -271,14 +271,14 @@ Let us find the WER when DS2 is finetuned on the training data from `{en-us, Cle
 
 1. `{en-us, Clean, ReSpeaker}` (i.e., no domain shift), 
 
-2. `{en-in, Clean, ReSpeaker}` (i.e., accent shift),
+2. `{en-gb, Clean, ReSpeaker}` (i.e., accent shift),
 
 3. `{en-gb, Clean, PS Eye}` (i.e., accent and microphone shift),
 
 4. `{en-gb, Rain, PS Eye}` (i.e., accent, microphone, background noise shift).
 
 
-|                         | en-us, Clean, ReSpeaker | en-in, Clean, ReSpeaker | en-gb, Clean, PS Eye | en-gb, Rain, PS Eye |
+|                         | en-us, Clean, ReSpeaker | en-gb, Clean, ReSpeaker | en-gb, Clean, PS Eye | en-gb, Rain, PS Eye |
 |:-----------------------:|:-----------------------:|:-------------------:|:--------------------:|:-------------------:|
 | en-us, Clean, ReSpeaker |       **0.106883**      |       0.276331      |       0.195826       |       0.256049      |
 
