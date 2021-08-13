@@ -132,33 +132,33 @@ We also provide a CSV file which lists all the .wav files inside each microphone
 
 **Clean US-English speech recorded on six microphones (`en-us`)** 
 
-[Part 1 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_aa) 
+[Part 1 (12GB)](https://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_aa) 
 
-[Part 2 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ab) 
+[Part 2 (12GB)](https://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ab) 
 
-[Part 3 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ac) 
+[Part 3 (12GB)](https://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ac) 
 
-[Part 4 (12GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ad) 
+[Part 4 (12GB)](https://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ad) 
 
-[Part 5 (6.4GB)](http://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ae)
+[Part 5 (6.4GB)](https://sensix.tech/libriadapt/libriadapt-en-us.tar.gz.part_ae)
 
 
 **Clean Indian-English speech recorded on six microphones (`en-in`)**
 
-[Part 1 (10GB)](http://sensix.tech/libriadapt/libriadapt-en-in.tar.gz.part_aa)
+[Part 1 (10GB)](https://sensix.tech/libriadapt/libriadapt-en-in.tar.gz.part_aa)
 
-[Part 2 (8.6GB)](http://sensix.tech/libriadapt/libriadapt-en-in.tar.gz.part_ab)
+[Part 2 (8.6GB)](https://sensix.tech/libriadapt/libriadapt-en-in.tar.gz.part_ab)
 
 
 **Clean British-English speech recorded on six microphones (`en-gb`)**
 
-[Part 1 (10GB)](http://sensix.tech/libriadapt/libriadapt-en-gb.tar.gz.part_aa)
+[Part 1 (10GB)](https://sensix.tech/libriadapt/libriadapt-en-gb.tar.gz.part_aa)
 
-[Part 2 (9.5GB)](http://sensix.tech/libriadapt/libriadapt-en-gb.tar.gz.part_ab)
+[Part 2 (9.5GB)](https://sensix.tech/libriadapt/libriadapt-en-gb.tar.gz.part_ab)
 
 **Noise recordings of rain, wind, laughter from six microphones (`noise`)** 
 
-[Part 1 (24 MB)](http://sensix.tech/libriadapt/libriadapt-noise.tar.gz)
+[Part 1 (24 MB)](https://sensix.tech/libriadapt/libriadapt-noise.tar.gz)
 
 
 #### Merge the tar.gz.part_* files
